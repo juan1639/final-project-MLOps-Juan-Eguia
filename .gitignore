@@ -1,6 +1,6 @@
 CLAUDE.md
 mlruns/*
-data/*
+#data/*
 
 ## Ignore all pychache files all projects
 src/__pycache__/
