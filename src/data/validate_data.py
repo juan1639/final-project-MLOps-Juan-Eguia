@@ -14,7 +14,7 @@ import numpy as np
 # =========================================================================
 def validate_data(dataframe: pd.DataFrame) -> None:
     """Apply simple validate logic"""
-    
+
     # 1. Check if target exists
     assert 'target' in dataframe.columns, "Target column missing!"
 
@@ -36,7 +36,7 @@ def validate_data(dataframe: pd.DataFrame) -> None:
     print("✅ Data Validation Passed!")
 
 # =========================================================================
-def main():
+def main() -> None:
     """Load the raw dataset and run validation."""
 
     path = "data/raw/diabetes_dataset.csv"

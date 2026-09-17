@@ -35,9 +35,9 @@ def load_data(path: Path) -> pd.DataFrame:
     return pd.read_csv(path)
 
 # =========================================================================
-def clean_data(input_df):
+def clean_data(input_df: pd.DataFrame) -> pd.DataFrame:
     """Apply simple cleaning logic"""
-    
+
     # Create a copy to avoid side effects
     cleaned_df = input_df.copy()
 
