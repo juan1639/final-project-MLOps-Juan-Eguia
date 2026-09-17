@@ -17,6 +17,9 @@ import pandas as pd
 from sklearn.datasets import load_diabetes
 
 # ==========================================================================
+OUTPUT_PATH = "data/raw/diabetes_dataset.csv"
+
+# ==========================================================================
 def load_raw_data() -> pd.DataFrame:
     """Load the Diabetes dataset and return it as a DataFrame."""
 
@@ -61,16 +64,14 @@ def save_dataset(df: pd.DataFrame, path: str) -> None:
 def main() -> None:
     """Run the data ingestion pipeline."""
 
-    output_path = "data/raw/diabetes_dataset.csv"
-
     print("Loading dataset...")
     df = load_raw_data()
 
     print("Saving dataset...")
-    save_dataset(df, output_path)
+    save_dataset(df, OUTPUT_PATH)
 
     print(f"Dataset shape: {df.shape}")
-    print(f"Output path: {output_path}")
+    print(f"Output path: {OUTPUT_PATH}")
     print("Done.")
 
 # ==========================================================================

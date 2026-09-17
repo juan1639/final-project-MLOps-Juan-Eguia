@@ -13,6 +13,8 @@ import numpy as np
 
 # =========================================================================
 def validate_data(dataframe: pd.DataFrame) -> None:
+    """Apply simple validate logic"""
+    
     # 1. Check if target exists
     assert 'target' in dataframe.columns, "Target column missing!"
 
