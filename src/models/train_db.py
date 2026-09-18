@@ -1,4 +1,19 @@
 """
+****************************************************************************************
+            ----- POR QUE HE CREADO ESTE ARCHIVO train_db.py -----
+
+Las versiones actuales de MLflow han puesto ese backend de archivos en maintenance mode
+y ya no permiten utilizarlo por defecto para nuevas operaciones.
+
+MLflow recomienda utilizar una base de datos,
+y para desarrollo local la opción más sencilla es SQLite.
+
+En el archivo .github/workflows/ci.yml ... tendremos que especificar si usar
+los archivos tipo train_db.py etc... o los tipo train.py
+
+****************************************************************************************
+"""
+"""
 This module trains three regression models on the California Housing dataset
 and tracks every run with MLflow Experiment Tracking.
 
@@ -45,8 +60,13 @@ from sklearn.model_selection import train_test_split
 #  
 # ---------------------------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parents[2]
-INPUT_PATH = BASE_DIR / "data" / "processed" / "train_v1.csv"   # usamos train_v1.csv (SIN feature_engineering)
-MLFLOW_TRACKING_URI = BASE_DIR / "mlruns"
+INPUT_PATH = BASE_DIR / "data" / "processed" / "train_v1.csv"
+#MLFLOW_TRACKING_URI = BASE_DIR / "mlruns"
+
+# ---- sqlite tracking-uri ------------------------------------
+MLFLOW_DB_PATH = BASE_DIR / "mlflow.db"
+MLFLOW_TRACKING_URI = f"sqlite:///{MLFLOW_DB_PATH.as_posix()}"
+# -------------------------------------------------------------
 
 EXPERIMENT_NAME = "diabetes-dataset"
 TARGET = "target"
@@ -194,7 +214,8 @@ def run_experiment(model, model_type: str, params: dict,
         # registered_model_name=None: registry is handled by register_model.py
         mlflow.sklearn.log_model(
             sk_model=model,
-            artifact_path="model",
+            #artifact_path="model", # deprecated
+            name="model",
             registered_model_name=None,
             input_example=X_train.head(5),   
         )
@@ -208,7 +229,7 @@ def run_experiment(model, model_type: str, params: dict,
 def main() -> None:
     """Run the full experiment tracking pipeline for both models."""
 
-    mlflow.set_tracking_uri(MLFLOW_TRACKING_URI.as_uri())
+    mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
     mlflow.set_experiment(EXPERIMENT_NAME)
     logger.info("MLflow tracking URI : %s", MLFLOW_TRACKING_URI)
     logger.info("Experiment          : %s", EXPERIMENT_NAME)
@@ -261,6 +282,7 @@ def main() -> None:
 # =========================================================================
 if __name__ == "__main__":
     main()
+
 
 
 

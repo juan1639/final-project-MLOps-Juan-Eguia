@@ -1,6 +1,11 @@
 """
 This module cleans the raw dataset
 It outputs a processed dataset ready for machine learning.
+
+    *************************************************************************
+    Voy a usar --- train_v1.csv --- para entrenar los datos,
+    ya que el feature-engineering hecho en el notebook no mejoró las métricas.
+    *************************************************************************
 """
 """
 ============================================================================
