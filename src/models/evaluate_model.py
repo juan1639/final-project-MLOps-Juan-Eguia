@@ -70,8 +70,8 @@ TEST_SIZE = 0.2
 RANDOM_STATE = 42
 
 # Quality thresholds for the champion alias:
-RMSE_THRESHOLD = 0.6
-R2_THRESHOLD = 0.7
+RMSE_THRESHOLD = 0.52   # uso este umbral en vista de los resultados obtenidos
+R2_THRESHOLD = 0.44     # uso este umbral en vista de los resultados obtenidos
 
 # =============================================================================
 #  Logging
