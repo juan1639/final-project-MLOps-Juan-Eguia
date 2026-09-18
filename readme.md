@@ -1,8 +1,10 @@
 # Final Project MLOps - Juan Eguía Abad
 
-An educational end-to-end MLOps pipeline built on the **diabetes** dataset.
-Each script is self-contained, independently runnable.
-From raw data ingestion, served, and CI-tested model.
+- End-to-end MLOps pipeline built on the **diabetes** dataset.
+- Each script is self-contained, independently runnable.
+- From raw data ingestion, served, and CI-tested model.
+
+**This project doesn't include Docker containerised**. It's only a example to understand
 
 **Stack:** Python 3.11 · scikit-learn · MLflow 2.9+ · Pydantic v2 · FastAPI · GitHub Actions
 
