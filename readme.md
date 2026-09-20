@@ -1,5 +1,8 @@
 # Final Project MLOps - Juan Eguía Abad
 
+[Link to my repository:]<https://github.com/juan1639/final-project-MLOps-Juan-Eguia>
+
+
 - End-to-end MLOps pipeline built on the **diabetes** dataset.
 - Each script is self-contained, independently runnable.
 - From raw data ingestion, served, and CI-tested model.
