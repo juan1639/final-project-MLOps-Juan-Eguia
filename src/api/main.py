@@ -14,8 +14,6 @@ Instead of running a script manually, we expose the model behind an HTTP API so
 that any client (a web app, a pipeline, a notebook) can request predictions at any
 time without knowing anything about scikit-learn or MLflow internals.
 
-Key decisions illustrated here:
-
 1. Load once at startup — loading a model is expensive; we do it once via FastAPI's
     lifespan context so every request hits an already-warm model in memory.
 
@@ -104,7 +102,7 @@ def predict(features: HousingFeatures) -> PredictionResponse:
     """Return a price prediction for a single housing record.
 
     Args:
-        features: The 10 engineered feature values for one house.
+        features: The 10 feature values
 
     Returns:
         PredictionResponse object:
@@ -114,7 +112,8 @@ def predict(features: HousingFeatures) -> PredictionResponse:
 
     model = get_model()
 
-    # Converts pydantic object into a dataframe (predict needs df param)
+    # Converts pydantic object into a dataframe (predict needs a dataframe param)
+    # ( pydantic-object --> dict --> dataframe )
     input_df = pd.DataFrame([features.model_dump()], columns=FEATURE_COLUMNS)
 
     try:
@@ -125,6 +124,8 @@ def predict(features: HousingFeatures) -> PredictionResponse:
 
     result = float(prediction[0])
     logger.info("Prediction: %.4f", result)
+
+    # And return a pydantic object:
     return PredictionResponse(prediction=result, model_version=_state["model_version"])
 
 
