@@ -13,7 +13,7 @@
 ## Project structure
 
 ```
-mlops-course/mlops/
+Final-project-MLOps/
 ├── requirements.txt                  # Lista todas las librerías externas y dependencias necesarias
 ├── .github/
 │   └── workflows/
