@@ -56,7 +56,10 @@ def load_champion_model() -> None:
     Raises RuntimeError if the alias does not exist.
     """
 
+    # Set env variable 'MLFLOW_TRACKING_URI':
     os.environ["MLFLOW_TRACKING_URI"] = MLFLOW_TRACKING_URI.as_uri()
+
+    # Use this tracking store:
     mlflow.set_tracking_uri(MLFLOW_TRACKING_URI.as_uri())
 
     logger.info("Loading model from registry: %s", MODEL_URI)
@@ -69,6 +72,7 @@ def load_champion_model() -> None:
         # stored artifact_uri, which is an absolute host path and BREAKS in Docker.
         run = client.get_run(mv.run_id)
 
+        # set a relative path about tracking store:
         model_path = (
             MLFLOW_TRACKING_URI / run.info.experiment_id / mv.run_id / "artifacts" / "model"
         )
