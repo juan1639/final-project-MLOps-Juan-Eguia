@@ -3,7 +3,7 @@ This module formally evaluates the latest version of the registered model
 "diabetes-dataset-model" using mlflow.evaluate().
 
 Results are logged to a dedicated MLflow run. If the model passes the quality
-thresholds (rmse < 0.6 and r2 > 0.7) the alias "champion" is assigned to that
+thresholds (rmse < 0.52 and r2 > 0.44) the alias "champion" is assigned to that
 model version, marking it as the go-to model for serving.
 """
 

@@ -10,6 +10,16 @@
 
 ---
 
+**NOTA:**
+
+En las versiones actuales de MLflow se recomienda utilizar una **base de datos**, en lugar de mlruns/
+y para desarrollo local la opción más sencilla es usar SQLite.
+
+**Pero de todas formas he desarrollado el proyecto con mlruns/ porque creo que el objetivo es**
+**comprender el concepto de cómo desarrollar un MLOps**
+
+---
+
 ## Project structure
 
 ```
