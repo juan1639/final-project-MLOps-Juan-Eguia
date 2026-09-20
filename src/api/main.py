@@ -38,7 +38,7 @@ from .model import (
     load_champion_model
 )
 
-from .schemas import FEATURE_COLUMNS, HousingFeatures, PredictionResponse
+from .schemas import FEATURE_COLUMNS, DiabetesFeatures, PredictionResponse
 
 # ===========================================================================
 #  Logging —> configure once for the whole application at entry point
@@ -69,7 +69,7 @@ async def lifespan(app: FastAPI):
     """
     load_champion_model()
 
-    yield   # aplication runs here
+    yield   # application runs here
     logger.info("Shutting down - releasing model from memory.")
     _state["model"] = None
 
@@ -91,15 +91,17 @@ def health() -> dict:
     return {"status": "ok", "model": MODEL_NAME}
 
 # ---------------------------------------------------------------------------
-@app.det("/model-info")
+@app.get("/model-info")
 def model_info() -> dict:
     """Return metadata about the loaded model version."""
     return get_model_info()
 
 # ---------------------------------------------------------------------------
 @app.post("/predict")
-def predict(features: HousingFeatures) -> PredictionResponse:
-    """Return a price prediction for a single housing record.
+def predict(features: DiabetesFeatures) -> PredictionResponse:
+    """Return a pydantic object:
+        - prediction
+        - model version
 
     Args:
         features: The 10 feature values
@@ -112,8 +114,8 @@ def predict(features: HousingFeatures) -> PredictionResponse:
 
     model = get_model()
 
-    # Converts pydantic object into a dataframe (predict needs a dataframe param)
-    # ( pydantic-object --> dict --> dataframe )
+    # Converts pydantic object into a DataFrame (predict needs a DataFrame param)
+    # ( pydantic-object --> dict --> DataFrame )
     input_df = pd.DataFrame([features.model_dump()], columns=FEATURE_COLUMNS)
 
     try:
@@ -127,6 +129,8 @@ def predict(features: HousingFeatures) -> PredictionResponse:
 
     # And return a pydantic object:
     return PredictionResponse(prediction=result, model_version=_state["model_version"])
+
+
 
 
 

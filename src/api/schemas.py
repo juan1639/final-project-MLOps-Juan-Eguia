@@ -26,10 +26,10 @@ FEATURE_COLUMNS = [
 ]
 
 # ===========================================================================
-# Schemas — request body (input) and response body (output)
+#  Schemas — request body (input) and response body (output)
 #  
 # ---------------------------------------------------------------------------
-class HousingFeatures(BaseModel):
+class DiabetesFeatures(BaseModel):
     """Input: the 10 feature values (excluding 'target')."""
 
     age: float
